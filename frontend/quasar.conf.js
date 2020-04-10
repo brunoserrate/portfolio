@@ -7,7 +7,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
-      'axios'
+      'axios',
+      'defaultheader'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -19,7 +20,7 @@ module.exports = function (ctx) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v4',
-      // 'fontawesome-v5',
+      'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -32,7 +33,7 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
+      lang: 'pt-br', // Quasar language pack
 
       // Possible values for "all":
       // * 'auto' - Auto-import needed Quasar components & directives
@@ -42,6 +43,9 @@ module.exports = function (ctx) {
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
+      config: {
+        dark: 'auto',
+      },
 
       components: [],
       directives: [],
@@ -72,10 +76,24 @@ module.exports = function (ctx) {
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
+    // devServer: {
+    //   https: false,
+    //   port: 8080,
+    //   open: true // opens browser window automatically
+    // },
     devServer: {
-      https: false,
-      port: 8080,
-      open: true // opens browser window automatically
+      // https: true,
+      port: 8084,
+      open: true, // opens browser window automatically
+      proxy: {
+        '/backend/api':{
+          target: 'http://127.0.0.1:8000',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/backend/api': '/api'
+          }
+        }
+      },
     },
 
     // animations: 'all', // --- includes all animations

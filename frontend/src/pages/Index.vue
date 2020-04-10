@@ -8,7 +8,19 @@
 </template>
 
 <script>
+
 export default {
   name: 'PageIndex'
-}
+};
 </script>
+
+<style>
+.body--light {
+  /* ... */
+}
+
+.body--dark {
+	background: #000
+  /* ... */
+}
+</style>

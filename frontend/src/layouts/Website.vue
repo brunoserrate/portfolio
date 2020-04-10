@@ -11,7 +11,7 @@
         </q-toolbar-title>
         <q-tabs align="right">
           <q-route-tab to="/" label="Home" />
-          <q-route-tab to="/sistemas" label="Sistemas" />
+          <q-route-tab to="/auth" label="Sistemas" />
         </q-tabs>
       </q-toolbar>
 
@@ -34,4 +34,12 @@ export default {
 </script>
 
 <style>
+.body--light {
+  /* ... */
+}
+
+.body--dark {
+  background: #000
+  /* ... */
+}
 </style>

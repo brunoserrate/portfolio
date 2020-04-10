@@ -7,19 +7,34 @@
       >
     </p>
     <p class="text-faded">
-      Sorry, nothing here...<strong>(404)</strong>
+      Página não encontrada...<strong>(404)</strong>
     </p>
     <q-btn
       color="secondary"
       style="width:200px;"
-      to="/"
-      label="Go back"
+      label="Voltar"
+      :to="rota"
     />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Error404'
-}
+  name: 'Error404',
+  data(){
+    return {
+    }
+  },
+  computed:{
+    rota: function () {
+      if(this.$route.path.includes('sistema')) {
+        return "/sistema/"
+      }
+
+      return "/"
+    }
+  },
+  methods:{
+  }
+};
 </script>
