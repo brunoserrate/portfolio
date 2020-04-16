@@ -2,11 +2,15 @@
 	<q-page style="padding:0 30px">
 	<appheader :breadcrumbs="breadcrumbs">Recipe Box</appheader>
 	<!-- Cadastro -->
-		<cadastro-receita>
+		<cadastro-receita
+      @recarregar="recarregar = true"
+    >
 		</cadastro-receita>
 	<!-- Cadastro -->
 	<!-- Listagem -->
-		<listagem-receita></listagem-receita>
+		<listagem-receita
+      :recarregar="recarregar"
+    ></listagem-receita>
 	<!-- Listagem -->
 	</q-page>
 </template>
@@ -20,10 +24,11 @@ export default {
   data(){
     return {
       breadcrumbs:[
-        { titulo:'Início', rota:'/sistema' },
-        { titulo:'Projetos', rota:'/sistema' },
+        { titulo:'Início', rota:'/sistema/' },
+        { titulo:'Projetos', rota:'/sistema/' },
         { titulo:'Recipe Box', rota:'recipe_box' }
       ],
+      recarregar: false
     }
   },
   components:{

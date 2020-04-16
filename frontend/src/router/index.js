@@ -5,12 +5,16 @@ import routes from './routes'
 
 import Vuelidate from 'vuelidate'
 
+import functions from '../mixins/functions'
+
 if(process.env.DEV){
    Vue.prototype.$pathAPI = '/backend/api' 
 }
 else{
    Vue.prototype.$pathAPI = '/app/backend/public/api'  
 }
+
+Vue.mixin(functions)
 
 Vue.use(Vuelidate)
 

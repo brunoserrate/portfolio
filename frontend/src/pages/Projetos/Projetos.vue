@@ -41,8 +41,8 @@ export default {
   data(){
     return {
       breadcrumbs:[
-        { titulo:'Início', rota:'/sistema' },
-        { titulo:'Projetos', rota:'/sistema' },
+        { titulo:'Início', rota:'/sistema/' },
+        { titulo:'Projetos', rota:'/sistema/' },
       ],
       menuLista: '',
     }

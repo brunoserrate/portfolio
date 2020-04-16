@@ -43,15 +43,19 @@ module.exports = function (ctx) {
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
-      config: {
-        dark: 'auto',
-      },
 
       components: [],
       directives: ['Ripple'],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Loading'
+      ],
+      config: {
+        dark: 'auto',
+      }
+      
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
