@@ -6,6 +6,7 @@ import routes from './routes'
 import Vuelidate from 'vuelidate'
 
 import functions from '../mixins/functions'
+import filters from '../store/filters'
 
 if(process.env.DEV){
    Vue.prototype.$pathAPI = '/backend/api' 
@@ -16,6 +17,18 @@ else{
 
 Vue.mixin(functions)
 
+// Filtros
+Vue.filter('converterBoolean', (valor) => {
+  if(valor == true){
+    return "Sim"
+  }
+
+  if(valor == false) {
+    return "Não"
+  }
+
+})
+// Filtros
 Vue.use(Vuelidate)
 
 Vue.use(VueRouter)

@@ -57,8 +57,8 @@
 		    	<div class="col">{{ receita.dificuldade | dificuldade }}</div>
 		    </q-card-section>
 		    <q-card-actions class="q-mt-md" align="right">
-			     <q-btn size="sm" color="negative" icon="fas fa-times" label="Excluir" />
-		    	<q-btn size="sm" icon="fas fa-edit" label="Editar" />
+			     <q-btn size="sm" color="negative" icon="fas fa-times" label="Excluir" @click="excluir" />
+		    	<q-btn size="sm" icon="fas fa-edit" label="Editar" @click="editar" />
 		    </q-card-actions>
 		</q-card>
 	</q-dialog>
@@ -72,7 +72,7 @@ const endpoint = '/receita'
 
 export default {
   name: 'RecipeBox',
-  props:['recarregar'],
+  props:['recarregar', 'pesquisado'],
   data(){
     return {
     	recipeModel:false,
@@ -114,7 +114,16 @@ export default {
         this.carregarDados()
       }
 
+      return false
+
     },
+    pesquisado(novo, antigo) {
+      if(this.pesquisado.length != 0){
+        this.dados = this.pesquisado
+      }
+
+    }
+
   },
   methods: {
     carregarDados(){
@@ -140,7 +149,31 @@ export default {
         that.$q.loading.hide()
       })
     },
+    editar(){
+      this.recipeModel = false
+      this.$emit('editar', this.receita)
+      this.receita = []
+    },
+    excluir(){
+      let that = this
+
+      that.$q.loading.show()
+
+      that.$axios.delete(that.$pathAPI + endpoint + '/' + that.receita.id)
+      .then((response) => {
+        that.carregarDados()
+        that.sucesso()
+      })
+      .catch((response) => {
+        that.falha(response)
+      })
+      .finally(() => {
+        that.$q.loading.hide()
+        that.recipeModel = false
+      })
+    },
     abrirReceita(dado) {
+      console.log(dado)
     	this.recipeModel = true
     	this.receita = dado
     }

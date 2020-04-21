@@ -65,7 +65,7 @@
   </q-dialog>
   <!-- Objetivos Modal -->
   <!-- New Recpie -->
-  <q-dialog v-model="newRecipe">
+  <q-dialog v-model="newRecipe" ref="dialog" @hide="limpar">
     <q-card class="q-pa-md my-card">
       <!-- Objetivos principais -->
       <q-card-section class="row items-center q-mb-md">
@@ -133,6 +133,7 @@ const endpoint = '/receita'
 
 export default {
   name: 'RecipeBox',
+  props:['receita', 'operacao'],
   data(){
     return {
       breadcrumbs:[
@@ -156,6 +157,30 @@ export default {
   },
   mounted(){
   },
+  watch: {
+    receita(novo, antigo) {
+      let ingredientes = ""
+      let etapas = ""
+
+      if(Object.keys(this.receita).length != 0) {
+
+        this.$set(this, 'form', Object.assign({},this.receita))
+
+        ingredientes = this.form.ingredientes.toString()
+        etapas = this.form.etapas.toString()
+
+        this.form.ingredientes = ingredientes.replace(/,/g, ";\n")
+        this.form.etapas = etapas.replace(/,/g, ";\n")
+
+        this.newRecipe = true
+      }
+      else {
+        this.form = {}
+        this.newRecipe = false
+      }
+
+    },
+  },
   methods: {
     incluir() {
       this.$set(this, 'newRecipe', true)
@@ -166,22 +191,38 @@ export default {
 
       that.$q.loading.show()
 
-      that.$axios.post(that.$pathAPI + endpoint, that.form)
-      .then((response) => {
-        that.sucesso()
-        that.limpar()
-        that.$emit('recarregar')
-      })
-      .catch((response) => {
-        that.falha(response)
-      })
-      .finally(() => {
-        that.$q.loading.hide()
-      })
+      if(that.operacao == 'editar' && that.receita.criado_por != "The Meal DB") {
+        that.$axios.put(that.$pathAPI + endpoint + '/' + that.form.id, that.form)
+        .then((response) => {
+          that.sucesso()
+          that.limpar()
+          that.$emit('recarregar')
+        })
+        .catch((response) => {
+          that.falha(response)
+        })
+      }
+      else {
+        that.$axios.post(that.$pathAPI + endpoint, that.form)
+        .then((response) => {
+          that.sucesso()
+          that.limpar()
+          that.$emit('recarregar')
+        })
+        .catch((response) => {
+          that.falha(response)
+        })
+        .finally(() => {
+          that.$q.loading.hide()
+        })
+
+      }
+
     },
     limpar() {
       this.$set(this, 'newRecipe', false)
       this.$set(this, 'form', {})
+      this.$emit('limpar')
     },
     tipoRefeicaoSelecionada(valor){
       this.$set(this.form, 'tipo_refeicao_id', valor.value)

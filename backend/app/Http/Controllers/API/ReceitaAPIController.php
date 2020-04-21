@@ -128,4 +128,13 @@ class ReceitaAPIController extends AppBaseController
 
         return $this->sendSuccess('Receita deleted successfully');
     }
+
+    public function filtro(Request $request) {
+
+        $receita = $this->receitaRepository->filtro($request->all());
+
+        return $this->sendResponse($receita, 'Consulta de receitas feita com sucesso');
+
+    }
+
 }
