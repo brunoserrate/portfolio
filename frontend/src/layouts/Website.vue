@@ -5,7 +5,7 @@
       <q-toolbar class="q-pa-sm">
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+            <img src="/statics/deviconw.png">
           </q-avatar>
           Portfólio
         </q-toolbar-title>
