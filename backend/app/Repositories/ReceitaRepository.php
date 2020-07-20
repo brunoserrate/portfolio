@@ -200,8 +200,14 @@ class ReceitaRepository extends BaseRepository
 
         }
 
-        $query = DB::table('receita')->select('*')
-                    ->where('titulo', 'LIKE', '%' . $input['titulo'] . '%');
+        $query = DB::table('receita')->select('*');
+
+        if(isset($input['titulo'])) {
+            if($input['titulo'] != '' && $input['titulo'] != null) {
+                $query->where('titulo', 'LIKE', '%' . $input['titulo'] . '%');
+
+            }
+        }
 
         return $query->distinct()->limit(9)->orderBy('id')->get();
 

@@ -91,7 +91,7 @@ export default {
   	autenticar(){
   		let that=this
   		that.$set(that,'autenticando',true) 
-  		if(that.form.username == 'admin' && that.form.password == 'e3q1o9p0r4'){
+  		if(that.form.username == 'admin' && that.form.password == '1234'){
   			sessionStorage.setItem('autenticado', true)
         sessionStorage.setItem('nome', 'Admin')
         sessionStorage.setItem('email', 'admin@app.com.br')

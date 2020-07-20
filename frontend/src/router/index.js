@@ -12,7 +12,7 @@ if(process.env.DEV){
    Vue.prototype.$pathAPI = '/backend/api' 
 }
 else{
-   Vue.prototype.$pathAPI = '/app/backend/public/api'  
+   Vue.prototype.$pathAPI = 'backend/public/api'  
 }
 
 Vue.mixin(functions)
