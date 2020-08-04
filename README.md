@@ -7,3 +7,5 @@ Por hora juntei ambos backend e frontend para facilitar na hora de subir pro git
 
 * Laravel 7.5.1 - PHP 7.3.1
 * Quasar framework 1.9.3 com VueJS
+
+Conflito 01
